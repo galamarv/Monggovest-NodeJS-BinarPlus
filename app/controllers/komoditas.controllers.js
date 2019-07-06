@@ -7,12 +7,14 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 exports.komoditas_post = (req, res) => {
+  console.log("tes");
   const komoditas = new Komoditas({
-    'foto': req.body.foto,
     'nama_ternak': req.body.nama_ternak,
+    'foto': req.body.foto,
     'asal': req.body.asal,
     'harga': req.body.harga
   })
+  
   if (req.decoded.username != "admin") {
     res.status(422).json({
       success: false,
