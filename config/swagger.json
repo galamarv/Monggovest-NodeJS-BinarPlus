@@ -1,0 +1,154 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "No description",
+    "version" : "1.0.0",
+    "title" : "New API",
+    "contact" : { }
+  },
+  "host" : "localhost:3000",
+  "schemes" : [ "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/api/user" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "get all user",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Create User",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/user"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      }
+    },
+    "/api/user/{id}" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "Get user by ID",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Sukses"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/user/update/{id}" : {
+      "put" : {
+        "tags" : [ "user" ],
+        "summary" : "Update user",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/user"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/user/delete/{id}" : {
+      "delete" : {
+        "tags" : [ "user" ],
+        "summary" : "delete by id",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/product" : {
+      "get" : {
+        "tags" : [ "product" ],
+        "summary" : "get",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "user" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n\t\"username\": \"tes\",\n\t\"password\": \"pass\",\n\t\"email\" : \"email@gmail.com\"\n}"
+    },
+    "Produk" : {
+      "type" : "object",
+      "properties" : {
+        "nama_produk" : {
+          "type" : "string"
+        },
+        "harga_produk" : {
+          "type" : "string"
+        },
+        "desk_produk" : {
+          "type" : "string"
+        },
+        "ketersediaan" : {
+          "type" : "boolean"
+        }
+      },
+      "example" : "{\n\t\"nama_produk\": \"Lifebouy\",\n\t\"harga_produk\": \"10000\",\n\t\"desk_produk\" : \"Sabun mandi\",\n\t\"ketersediaan\" : false\n}"
+    }
+  }
+}
