@@ -54,29 +54,19 @@ exports.show_komoditas = (req, res) => {
 }
 
 
-exports.komoditas_peternak = (req, res) => {
-  _id = req.decoded._id
-
-  Komoditas.find({ peternak: req.params.peternak }, (err, _id) => {
-    if (req.decoded._id != req.params.peternak) {
-      res.status(422).json({
-        success: false,
-        message: 'failed',
-        error: err
-      })
-    }
-    else {
-      Komoditas.find({ peternak: req.params.peternak })
-      .then(Post => {
-        res.status(201).send({
-          data: Post
-        })
+exports.show_komoditas_detail = (req, res, next) => {
+  Komoditas.find({ _id: req.params.id}, (err, result) => {
+      if (err) {
+          res.status(422).json({
+              success: false,
+              message: 'failed',
+              error: err
+          })
       }
-      ).catch(err => {
-        res.status(500).send({
-          error: err.message
-        });
-      })
-    }
-  })
-}
+      else {
+          res.status(200).json({
+              result : result
+          });
+      }
+  });
+};
