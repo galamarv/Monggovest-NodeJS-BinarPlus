@@ -10,7 +10,8 @@ const saltRounds = 10;
 
 exports.create_user = (req, res) => {
     var user = new User({
-        username: req.body.username,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, saltRounds)
     })
@@ -71,7 +72,7 @@ exports.update_user = (req, res) => {
 
 exports.user_login = (req, res) => {
 
-    User.findOne({ username: req.body.username }, (err, user) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
         if (!user) return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. Double-check your email address and try again.'});
             
         bcrypt.compare(req.body.password, user.password, function (err, response) {
@@ -117,9 +118,9 @@ exports.user_login = (req, res) => {
 
 
 exports.admin_login = (req, res) => {
-    User.findOne({ username : req.body.username }, (err, user) => {
+    User.findOne({ email : req.body.email }, (err, user) => {
         //console.log(user);
-        if (req.body.username != "admin") {
+        if (req.body.email != "admin") {
             res.status(422).json({
                 success: false,
                 message: 'anda bukan admin',
@@ -171,12 +172,7 @@ exports.admin_login = (req, res) => {
 
 
 exports.konfirmasi = function (req, res, next) {
-    
- 
-    // Check for validation errors    
-    
- 
-    // Find a matching token
+
     Token.findOne({ token: req.params.token }, function (err, token) {
         if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
  
@@ -192,6 +188,31 @@ exports.konfirmasi = function (req, res, next) {
                 res.status(200).send("The account has been verified. Please log in.");
             });
         });
+    });
+};
+
+exports.resendToken = function (req, res, next) {
+ 
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
+        if (user.isVerified) return res.status(400).send({ msg: 'This account has already been verified. Please log in.' });
+ 
+        // Create a verification token, save it, and send email
+        var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+ 
+        // Save the token
+        token.save(function (err) {
+            if (err) { return res.status(500).send({ msg: err.message }); }
+ 
+            // Send the email
+            var transporter = nodemailer.createTransport({ service: 'gmail', auth: { user: 'mongovest@gmail.com' , pass: 'asdfghjklqwertyuiop' } });
+            var mailOptions = { from: 'no-reply@codemoto.io', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+            transporter.sendMail(mailOptions, function (err) {
+                if (err) { return res.status(500).send({ msg: err.message }); }
+                res.status(200).send('A verification email has been sent to ' + user.email + '.');
+            });
+        });
+ 
     });
 };
 

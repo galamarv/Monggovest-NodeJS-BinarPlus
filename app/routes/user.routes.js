@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.post('/api/user/login', user.user_login)
     app.post('/api/admin/login/', user.admin_login)
     app.get('/confirmation/:token', user.konfirmasi)
-    //app.post('/resend', user.resendTokenPost)
+    app.post('/resend', user.resendToken)
    
    
 
