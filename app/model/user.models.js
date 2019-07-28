@@ -19,10 +19,12 @@ const UserSchema = new mongoose.Schema({
 	    type: String,
 	    required: true,
 	  },
-	  ternak: [{
-	    type: Schema.Types.ObjectId,
-	    ref: 'Komoditas'
-	  }]
+	  passwordResetToken: String,
+	  passwordResetExpires: Date,
+	  isVerified: { type: Boolean, default: false }
 });
+
+
+
 
 module.exports = mongoose.model('User',UserSchema);

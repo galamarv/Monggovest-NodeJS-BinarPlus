@@ -9,6 +9,9 @@ module.exports = (app) => {
     app.put('/api/user/', auth.isAuthenticated, user.update_user)
     app.post('/api/user/login', user.user_login)
     app.post('/api/admin/login/', user.admin_login)
+    app.get('/confirmation/:token', user.konfirmasi)
+    //app.post('/resend', user.resendTokenPost)
+   
    
 
     

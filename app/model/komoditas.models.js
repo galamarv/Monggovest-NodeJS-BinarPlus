@@ -9,4 +9,5 @@ const KomoditasSchema = Schema({
     harga: String
   });
 
+KomoditasSchema.index({'nama_ternak': 'text', 'asal': 'text'});
   module.exports = mongoose.model('Komoditas',KomoditasSchema);
