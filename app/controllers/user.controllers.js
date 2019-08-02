@@ -42,7 +42,7 @@ exports.create_user = (req, res) => {
                 service: 'gmail',
                 auth: {
                     user: 'mongovest@gmail.com',
-                    pass: 'asdfghjklqwertyuiop'
+                    pass: ''
                 }
             });
             var mailOptions = {
@@ -273,7 +273,7 @@ exports.resendToken = function (req, res, next) {
                 service: 'gmail',
                 auth: {
                     user: 'mongovest@gmail.com',
-                    pass: 'asdfghjklqwertyuiop'
+                    pass: ''
                 }
             });
             var mailOptions = {

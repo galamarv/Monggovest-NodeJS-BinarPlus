@@ -33,7 +33,7 @@ exports.transaksi_post = (req, res) => {
             service: 'gmail',
             auth: {
                 user: 'mongovest@gmail.com',
-                pass: 'asdfghjklqwertyuiop'
+                pass: ''
             }
         });
         var mailOptions = {
