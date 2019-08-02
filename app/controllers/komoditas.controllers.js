@@ -15,7 +15,7 @@ exports.komoditas_post = (req, res) => {
     'harga': req.body.harga
   })
 
-  if (req.decoded.username != "admin") {
+  if (req.decoded.email != "admin") {
     res.status(422).json({
       success: false,
       message: 'anda bukan admin'

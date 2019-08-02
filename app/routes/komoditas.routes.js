@@ -6,7 +6,5 @@ module.exports = (app) => {
     app.get('/api/user/komoditas',  komoditas.show_komoditas)
     app.get('/api/user/komoditas/:id',  komoditas.show_komoditas_detail)
     app.post('/api/user/komoditas/cari', komoditas.cari_komoditas)
-    //app.get('/api/user/komoditas/:peternak', auth.isAuth, komoditas.komoditas_peternak)
-
     
 }

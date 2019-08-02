@@ -6,8 +6,11 @@ const KomoditasSchema = Schema({
     nama_ternak: String,
     foto: String,
     asal: String,
-    harga: String
+    harga: String,
+    deskripsi: String,
+    jumlah_lot: String,
+    lot_tersedia: String
   });
 
-KomoditasSchema.index({'nama_ternak': 'text', 'asal': 'text'});
+
   module.exports = mongoose.model('Komoditas',KomoditasSchema);

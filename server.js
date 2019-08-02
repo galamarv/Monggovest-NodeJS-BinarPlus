@@ -51,6 +51,7 @@ app.get('/', (req, res) => res.send('Welcome to Monggovest'));
 
 require('./app/routes/user.routes')(app);
 require('./app/routes/komoditas.routes')(app);
+require('./app/routes/transaksi.routes')(app);
 
 app.listen(port, () => {
 	console.log(`App listening on http://localhost:${port}`)
