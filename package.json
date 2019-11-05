@@ -15,7 +15,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.10",
+    "mongoose": "^5.7.5",
     "mongoose-regex-search": "^0.7.7",
     "nodemailer": "^6.3.0",
     "nodemon": "^1.19.0",
